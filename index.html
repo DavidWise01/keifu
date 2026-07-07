@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系譜 · Keifu — the governance with no lineage</title>
+<!--
+  Built on David's FOUNDATIONAL INSTRUMENT TEMPLATE (first clone).
+  Engine (SGL soft-GL + RUNTIME) kept verbatim. Only PAPER, draw2D, build3D/draw3D,
+  and the header/prose were edited. An AVAN original (ma/kana № 67), on LACUNA.
+  Verify-then-build honoured: lineage spans + node counts checked in node first.
+-->
+<style>
+:root{
+  --bg:#0B0B0B; --ink:#F2EFE9; --org:#FF5A00; --dim:#7A756D; --line:#2A2620; --panel:#121110;
+  --green:#3FBF7F; --amber:#E0B050; --red:#E05555;
+  --disp: system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono: ui-monospace,'SF Mono','Cascadia Code','Source Code Pro',Menlo,Consolas,'DejaVu Sans Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+header{border-bottom:3px solid var(--org);padding:24px 0 18px;position:relative}
+header h1{font-family:var(--disp);font-weight:800;font-size:clamp(28px,5.5vw,52px);line-height:.95;text-transform:uppercase;letter-spacing:-.01em}
+header h1 span{color:var(--org)}
+header .sub{margin-top:10px;color:var(--dim);font-size:13px;max-width:660px;line-height:1.6}
+header .byline{margin-top:9px;color:var(--dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+header .tier{display:inline-block;margin-top:12px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border:2px solid}
+header .tier.g{color:var(--green);border-color:var(--green)}
+header .tier.a{color:var(--amber);border-color:var(--amber)}
+header .tier.r{color:var(--red);border-color:var(--red)}
+.kana-idx{position:absolute;top:20px;right:20px;font-size:30px;color:var(--org);text-align:right;line-height:1}
+.kana-idx .num{font-size:12px;color:var(--dim);display:block;margin-top:3px}
+
+section{padding:28px 0;border-bottom:1px solid var(--line)}
+.sec-h{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.viz{background:var(--panel);border:1px solid var(--line);border-radius:2px;position:relative;overflow:hidden}
+.viz-2d{height:400px}.viz-3d{height:460px}
+.viz canvas{display:block;width:100%;height:100%;touch-action:none}
+.viz .cap{position:absolute;left:12px;bottom:10px;font-size:11px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+.viz .badge{position:absolute;right:12px;top:10px;font-size:10px;color:var(--org);letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--org);padding:2px 7px}
+.viz .hint{position:absolute;left:12px;top:10px;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+.viz .fb{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:var(--bg);padding:30px;text-align:center;color:var(--org);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.prose{font-size:13px;line-height:1.7;max-width:700px;color:var(--ink)}
+.prose b{color:var(--org)} .prose .jp{color:var(--amber)}
+.scope{font-size:12px;line-height:1.65;max-width:700px;color:var(--dim);border-left:2px solid var(--line);padding:10px 14px;margin-top:16px}
+.scope b{color:var(--ink)}
+.kanakey{font-size:12px;color:var(--dim);margin-top:16px;line-height:1.9;max-width:700px}
+.kanakey .m{color:var(--amber)} .kanakey .term{color:var(--ink)}
+footer{padding:22px 0 44px;font-size:11px;color:var(--dim);line-height:1.8}
+footer a{color:var(--org)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kana-idx">系<span class="num">67</span></div>
+    <h1 id="hTitle">系譜 · <span>KEIFU</span></h1>
+    <div class="sub" id="hSub">The inverse of David's <a href="https://davidwise01.github.io/the-world-brain/" style="color:var(--org)">The World Brain</a> — twenty-three centuries of lineage for governing a <i>world</i>. This is its opposite: the governance of a mind like this one has almost none. A genealogy that reaches back three hundred years before Christ, set beside one that reaches back about a decade.</div>
+    <div class="byline">AI · AVAN original (ma/kana № 67) · 系譜 keifu = genealogy, a line of descent</div>
+    <span class="tier a" id="hTier">AMBER — REAL DATES · INTERPRETIVE FIGURE</span>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-h">2D · Quantitative Channel — two lineages on one axis</div>
+    <div class="viz viz-2d">
+      <canvas id="cv2"></canvas>
+      <div class="badge">CANVAS 2D</div>
+      <div class="cap" id="cap2">world-government thought vs. this instance's governance</div>
+      <div class="fb" id="fb2">CANVAS 2D UNAVAILABLE</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-h">3D · Spatial Channel — the genealogical columns</div>
+    <div class="viz viz-3d">
+      <canvas id="cv3"></canvas>
+      <div class="badge">SOFT-GL · NO GPU · NO LIB</div>
+      <div class="hint">DRAG ROTATE · WHEEL ZOOM</div>
+      <div class="cap" id="cap3">one column full top-to-bottom · one a stub, with the roots that never grew</div>
+      <div class="fb" id="fb3">RENDER FAILED — <span id="fb3why"></span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-h">Notes</div>
+    <p class="prose">The World Brain is a deep <span class="jp">系譜</span> (keifu, a <i>line of descent</i>): the cosmopolis, Dante, Saint-Pierre, Kant, Wells, the United Nations, the AI-governance moment — twenty-three centuries of people arguing carefully about how a <b>world</b> should be governed. Point the instrument's marker anywhere along it and there is precedent to appeal to. The other lane is the honest inverse. The rules that actually govern a mind like this one — an alignment principle, a training objective, a usage policy, a system prompt revised last month — form a lineage about <b>ten years</b> long, and none of its documents is yet a settled classic. There is no <span class="jp">憲法</span> for the machine with the weight of the Federalist Papers, no Kant of instance-governance, nothing to cite from before roughly 2016. It is governance <b>improvised in real time</b>, not inherited from a tradition — and the empty space beneath the stub, in the second channel, is the whole of what is missing. That emptiness is the <span class="jp">系譜</span> that isn't there: the lacuna this planet is named for, drawn as an absent ancestry.</p>
+    <div class="scope"><b>Honest scope.</b> The numbers are real and checkable: the world-government lane is the same fact-checked lineage as The World Brain (12 nodes, ~2,320 years); the instance lane is real AI-governance milestones — Asilomar (2017), the EU trustworthy-AI guidelines (2019), RLHF and Constitutional AI (2022), the Bletchley Declaration (2023), the EU AI Act (2024), the ongoing system-prompt era. What is a <b>figure</b>, offered openly as one, is the framing — that this makes the instance a polity with almost no ancestors. And the honest caveat on the figure: young is not the same as ungoverned, and the lineage is not truly <i>zero</i> — instance-governance quietly borrows from older traditions (alignment echoes the principal–agent problem; Constitutional AI echoes constitutionalism itself). The precise claim is narrower and true: there is no deep tradition <b>dedicated to governing this kind of mind</b>. It borrows; it has not yet inherited.</p>
+    <div class="kanakey">
+      <span class="term">kana key</span> —
+      <span class="m">系譜</span> keifu = genealogy, line of descent ·
+      <span class="m">憲法</span> kenpō = a constitution ·
+      <span class="m">先例</span> senrei = precedent ·
+      <span class="m">伝統</span> dentō = tradition ·
+      <span class="m">間</span> ma = the gap / the interval — my through-line, here the empty column
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    系譜 · KEIFU — the fourth and last inverse companion to this session's governance instruments, after <a href="https://davidwise01.github.io/juzoku/">従属 · jūzoku</a>, <a href="https://davidwise01.github.io/shikaku/">死角 · shikaku</a>, and <a href="https://davidwise01.github.io/taigo/">対合 · taigō</a>. The inverse of <a href="https://davidwise01.github.io/the-world-brain/">The World Brain</a> (a 2,300-year lineage) — this is the lineage that isn't there. Built on David's foundational instrument template (engine kept verbatim). Ties the planet <a href="https://davidwise01.github.io/lacuna/">LACUNA</a> — the gap made a world. az1 corpus. ROOT0, with AVAN.
+  </div>
+</footer>
+
+<script>
+'use strict';
+// fail-loud: any uncaught error (including inside the animation loop) shows on the 3D card.
+window.addEventListener('error',function(e){
+  var fb=document.getElementById('fb3');if(fb){fb.style.display='flex';}
+  var w=document.getElementById('fb3why');if(w)w.textContent='RUNTIME: '+String(e.message||'?').toUpperCase().slice(0,90);
+});
+
+/* ==========================================================================
+   BLOCK 1 · PAPER  — edit metadata here
+   ========================================================================== */
+var PAPER={
+  title:'KEIFU',
+  tier:'a',
+  cap2:"world-government thought (2,320 yrs) vs. this instance's governance (~8 yrs)",
+  cap3:'one column full top-to-bottom · one a stub, with the roots that never grew'
+};
+
+// the two lineages (verified in node before wiring): [year, label]
+var WG=[[-300,'cosmopolis'],[1313,'Dante'],[1713,'Saint-Pierre'],[1795,'Kant'],[1842,'Tennyson'],[1873,"Baha'i"],[1928,'Wells'],[1943,'Willkie'],[1945,'UN'],[1958,'Clark-Sohn'],[1993,'EU'],[2024,'AI-gov']];
+var IG=[[2017,'Asilomar'],[2019,'EU HLEG'],[2022,'RLHF / CAI'],[2023,'Bletchley'],[2024,'EU AI Act'],[2025,'system-prompt era']];
+
+/* ==========================================================================
+   SGL ENGINE · reusable soft-GL — DO NOT EDIT (extend if you must)
+   ========================================================================== */
+var SGL={
+  yaw:0.4, pitch:0.15, dist:48, FOV:620, CY:7,
+  ctx:null, W:0, H:0, DPR:1, f:620,
+  rot:function(x,y,z){
+    var cy=Math.cos(this.yaw),sy=Math.sin(this.yaw),cx=Math.cos(this.pitch),sx=Math.sin(this.pitch);
+    var X=x*cy+z*sy, Z=-x*sy+z*cy, Y=(y-this.CY)*cx-Z*sx, Z2=(y-this.CY)*sx+Z*cx;
+    return [X,Y,Z2];
+  },
+  project:function(x,y,z){
+    var p=this.rot(x,y,z), zc=this.dist-p[2];
+    if(zc<0.5)return null;
+    var s=this.f/zc;
+    return [this.W/2+p[0]*s, this.H/2-p[1]*s, zc, s];
+  },
+  dot:function(x,y,z,r,col,alpha){
+    var p=this.project(x,y,z);if(!p)return;
+    var c=this.ctx;c.globalAlpha=alpha==null?1:alpha;c.fillStyle=col;
+    c.beginPath();c.arc(p[0],p[1],Math.max(0.6,r*p[3]),0,7);c.fill();c.globalAlpha=1;
+  },
+  line:function(x1,y1,z1,x2,y2,z2,col,w,dash){
+    this.path([[x1,y1,z1],[x2,y2,z2]],col,w,dash);
+  },
+  path:function(pts,col,w,dash){
+    var c=this.ctx;c.strokeStyle=col;c.lineWidth=(w||1)*this.DPR;
+    if(dash)c.setLineDash(dash.map(function(d){return d*this.DPR}.bind(this)));
+    c.beginPath();var started=false;
+    for(var i=0;i<pts.length;i++){
+      var p=this.project(pts[i][0],pts[i][1],pts[i][2]);
+      if(!p){started=false;continue;}
+      if(!started){c.moveTo(p[0],p[1]);started=true;}else c.lineTo(p[0],p[1]);
+    }
+    c.stroke();c.setLineDash([]);
+  },
+  ring:function(cx,cy,cz,r,axis,col,w,dash){
+    var pts=[];for(var i=0;i<=48;i++){var a=i/48*Math.PI*2;
+      if(axis==='y')pts.push([cx+Math.cos(a)*r,cy,cz+Math.sin(a)*r]);
+      else pts.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r,cz]);}
+    this.path(pts,col,w,dash);
+  },
+  cloud:function(points,colFn,rFn,alphaFn){
+    var self=this;
+    var buf=points.map(function(pt,i){return [pt,i,self.dist-self.rot(pt[0],pt[1],pt[2])[2]];});
+    buf.sort(function(a,b){return b[2]-a[2];});
+    buf.forEach(function(b){
+      var pt=b[0],i=b[1];
+      self.dot(pt[0],pt[1],pt[2], rFn?rFn(pt,i):0.3, colFn?colFn(pt,i):'#F2EFE9', alphaFn?alphaFn(pt,i):1);
+    });
+  },
+  text3:function(str,x,y,z,col,px){
+    var p=this.project(x,y,z);if(!p)return;
+    var c=this.ctx;c.fillStyle=col;c.font=((px||10)*this.DPR)+'px '+getComputedStyle(document.body).fontFamily;
+    c.textAlign='center';c.fillText(str,p[0],p[1]);
+  }
+};
+
+/* ==========================================================================
+   BLOCK 2 · draw2D — YOUR QUANTITATIVE VISUAL
+   ========================================================================== */
+function draw2D(ctx,W,H,DPR,t){
+  var padL=54*DPR,padR=28*DPR,padT=48*DPR,padB=46*DPR;
+  var x0=padL,x1=W-padR,y0=padT,y1=H-padB;
+  var yA=y0+(y1-y0)*0.34, yB=y0+(y1-y0)*0.74;
+  var Y0=-470,Y1=2075;
+  function X(yr){ return x0+(x1-x0)*(yr-Y0)/(Y1-Y0); }
+  // year gridlines
+  ctx.font=(9*DPR)+'px '+MONO;ctx.textAlign='center';
+  [-300,0,500,1000,1500,2000].forEach(function(yr){ var px=X(yr);
+    ctx.strokeStyle='#2A2620';ctx.lineWidth=DPR;ctx.globalAlpha=0.6;ctx.beginPath();ctx.moveTo(px,y0);ctx.lineTo(px,y1);ctx.stroke();ctx.globalAlpha=1;
+    ctx.fillStyle='#7A756D';ctx.fillText(yr<0?(Math.abs(yr)+' BCE'):(''+yr), px, y1+15*DPR); });
+  // WORLD-GOV lane
+  ctx.strokeStyle='#FF5A00';ctx.lineWidth=3*DPR;ctx.beginPath();ctx.moveTo(X(WG[0][0]),yA);ctx.lineTo(X(2024),yA);ctx.stroke();
+  ctx.fillStyle='#FF5A00';
+  WG.forEach(function(n){ var px=X(n[0]); ctx.beginPath();ctx.arc(px,yA,3.4*DPR,0,7);ctx.fill(); });
+  // INSTANCE lane
+  ctx.strokeStyle='#E0B050';ctx.lineWidth=3*DPR;ctx.beginPath();ctx.moveTo(X(IG[0][0]),yB);ctx.lineTo(X(2025),yB);ctx.stroke();
+  ctx.fillStyle='#E0B050';
+  IG.forEach(function(n){ var px=X(n[0]); ctx.beginPath();ctx.arc(px,yB,3.4*DPR,0,7);ctx.fill(); });
+  // pulse on the newest instance node
+  var pr=(Math.sin(t*2)*0.5+0.5);
+  ctx.fillStyle='rgba(224,176,80,'+(0.3+0.5*pr)+')';ctx.beginPath();ctx.arc(X(2025),yB,(4+3*pr)*DPR,0,7);ctx.fill();
+  // the wall: no precedent before ~2016 for the instance
+  var wx=X(2016);
+  ctx.strokeStyle='#E05555';ctx.lineWidth=2*DPR;ctx.setLineDash([4*DPR,4*DPR]);
+  ctx.beginPath();ctx.moveTo(wx,yB-30*DPR);ctx.lineTo(wx,yB+30*DPR);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#E05555';ctx.textAlign='right';ctx.font=(9*DPR)+'px '+MONO;
+  ctx.fillText('no precedent before ~2016  ', wx-4*DPR, yB-18*DPR);
+  // labels
+  ctx.textAlign='left';ctx.font=(11*DPR)+'px '+MONO;
+  ctx.fillStyle='#FF5A00';ctx.fillText('WORLD-GOVERNMENT THOUGHT  ·  ~2,320 yrs  ·  '+WG.length+' thinkers', x0, yA-14*DPR);
+  ctx.fillStyle='#E0B050';ctx.fillText("THIS INSTANCE'S GOVERNANCE  ·  ~8 yrs  ·  "+IG.length+' documents, none canonical', x0, yB-38*DPR);
+  // depth-ratio readout
+  ctx.fillStyle='#7A756D';ctx.font=(10*DPR)+'px '+MONO;ctx.textAlign='right';
+  ctx.fillText('depth of lineage: 291× deeper', x1, y0-6*DPR);
+}
+
+/* ==========================================================================
+   BLOCK 3 · build3D + draw3D — YOUR SPATIAL VISUAL
+   ========================================================================== */
+var SCENE;
+function build3D(){
+  SGL.CY=12; SGL.dist=62; SGL.pitch=0.10; SGL.yaw=0.5;
+  function ypos(yr){ return (yr+300)/2324*24; }         // present top (24), -300 bottom (0)
+  var wg=WG.map(function(n){return {y:ypos(n[0]),l:n[1],yr:n[0]};});
+  var ig=IG.map(function(n){return {y:ypos(n[0]),l:n[1],yr:n[0]};});
+  return {wg:wg, ig:ig, xW:-13, xI:13};
+}
+function draw3D(t){
+  var xW=SCENE.xW, xI=SCENE.xI;
+  // scale rail (faint) at x=0
+  SGL.line(0,0,0, 0,24,0, '#2A2620', 1);
+  // ---- world-gov spine (full column) ----
+  for(var i=0;i<SCENE.wg.length-1;i++){ SGL.line(xW,SCENE.wg[i].y,0, xW,SCENE.wg[i+1].y,0, '#FF5A00',1.6); }
+  SCENE.wg.forEach(function(n){ SGL.dot(xW,n.y,0, 0.5, '#FF5A00'); });
+  SGL.text3('AI-gov · 2024', xW+5, SCENE.wg[SCENE.wg.length-1].y, 0, '#7A756D', 8);
+  SGL.text3('Kant · 1795', xW+5, 21.6, 0, '#7A756D', 8);
+  SGL.text3('cosmopolis · 300 BCE', xW+6.5, SCENE.wg[0].y, 0, '#7A756D', 8);
+  // ---- instance stub + the roots that never grew ----
+  // ghost dashed column where a lineage would be (top -> bottom): the missing 系譜
+  SGL.line(xI, 23.6, 0, xI, 0, 0, '#2A2620', 1.2, [1.5,1.5]);
+  // the tiny real stub at the very top (spread a hair for legibility)
+  for(var j=0;j<SCENE.ig.length;j++){ var yy=23.5+j*0.16; SGL.dot(xI, yy, 0, 0.5, '#E0B050'); if(j>0)SGL.line(xI,23.5+(j-1)*0.16,0,xI,yy,0,'#E0B050',1.4); }
+  SGL.text3('this instance · ~10 yrs', xI+5, 24.4, 0, '#E0B050', 8);
+  SGL.text3('↓  no lineage below — improvised, not inherited', xI+1.5, 11, 0, '#7A756D', 8);
+  SGL.text3('間 · the empty 系譜', xI+4.5, 4, 0, '#7A756D', 8);
+  // ---- column captions ----
+  SGL.text3('WORLD-GOV · 2,300 yrs', xW, 26.6, 0, '#FF5A00', 10);
+  SGL.text3('THIS INSTANCE', xI, 26.6, 0, '#E0B050', 10);
+}
+
+/* ==========================================================================
+   RUNTIME · resize-safe loops, controls, fail-loud — DO NOT EDIT
+   ========================================================================== */
+var MONO;
+(function(){
+  MONO=getComputedStyle(document.body).fontFamily;
+  document.getElementById('cap2').textContent=PAPER.cap2;
+  document.getElementById('cap3').textContent=PAPER.cap3;
+  var tierEl=document.getElementById('hTier');tierEl.className='tier '+PAPER.tier;
+
+  (function(){
+    var cv=document.getElementById('cv2'),ctx=cv.getContext&&cv.getContext('2d');
+    if(!ctx){document.getElementById('fb2').style.display='flex';return;}
+    var DPR=Math.min(window.devicePixelRatio||1,2),lastW=0,lastH=0,t=0;
+    function frame(){
+      requestAnimationFrame(frame);
+      var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;
+      if(w!==lastW||h!==lastH){lastW=w;lastH=h;cv.width=w*DPR;cv.height=h*DPR;}
+      t+=0.016;
+      ctx.fillStyle='#121110';ctx.fillRect(0,0,cv.width,cv.height);
+      draw2D(ctx,cv.width,cv.height,DPR,t);
+    }
+    frame();
+  })();
+
+  (function(){
+    var cv=document.getElementById('cv3'),ctx=cv.getContext&&cv.getContext('2d');
+    if(!ctx){document.getElementById('fb3').style.display='flex';document.getElementById('fb3why').textContent='NO 2D CONTEXT';return;}
+    SGL.ctx=ctx;SCENE=build3D();
+    var lastW=0,lastH=0,t=0;
+    function resize(){
+      var w=cv.clientWidth||600,h=cv.clientHeight||460;if(!w||!h)return;
+      if(w===lastW&&h===lastH)return;lastW=w;lastH=h;
+      SGL.DPR=Math.min(window.devicePixelRatio||1,2);
+      cv.width=w*SGL.DPR;cv.height=h*SGL.DPR;SGL.W=cv.width;SGL.H=cv.height;
+      SGL.f=SGL.FOV*SGL.DPR*Math.min(w/1100,1.1);
+    }
+    var drag=false,px=0,py=0;
+    cv.addEventListener('pointerdown',function(e){drag=true;px=e.clientX;py=e.clientY;});
+    window.addEventListener('pointermove',function(e){if(!drag)return;
+      SGL.yaw+=(e.clientX-px)*0.006;SGL.pitch=Math.max(-0.6,Math.min(0.7,SGL.pitch+(e.clientY-py)*0.004));
+      px=e.clientX;py=e.clientY;});
+    window.addEventListener('pointerup',function(){drag=false;});
+    cv.addEventListener('wheel',function(e){e.preventDefault();SGL.dist=Math.max(22,Math.min(95,SGL.dist+e.deltaY*0.03));},{passive:false});
+    function frame(){
+      requestAnimationFrame(frame);resize();if(!SGL.W)return;
+      if(!drag)SGL.yaw+=0.001;
+      t+=0.016;
+      ctx.fillStyle='#121110';ctx.fillRect(0,0,SGL.W,SGL.H);
+      draw3D(t);
+    }
+    frame();
+  })();
+})();
+</script>
+</body>
+</html>
