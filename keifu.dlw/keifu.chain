@@ -1,0 +1,9 @@
+ROOT0-DLW-CHAIN-v1
+index : 1268
+slug  : keifu
+seal  : 4bc826d4849fa66182142964d90ca8996cb3436aba42f3f242e6b5a1003ff809
+prev  : ad13c60e21e5a5cc1ff9ddd6b77ba3bb7018a25116f0f455c87dc3c3bab9dd2b
+link  : b879b52e7a0b378ed0c045ecd451d63f34fe8713f512269a59381df17e9c271f
+head  : eff4338d5feb1c1a3d8b51b42f6042e41cc2c47f908ed6e326673243b18a5461
+
+— the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
